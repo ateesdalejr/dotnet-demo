@@ -1,0 +1,101 @@
+@* Layout - migrated from Site.Master (ASP.NET Web Forms) by contractor
+   Original had a lot more in it but most was dead code
+   Bootstrap 3.3.7 via CDN because "we don't need to upgrade" - Dave (2019) *@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@(ViewBag.PageTitle ?? "ACME Industrial Supply") - Customer Management System v2.3.1</title>
+    @* Bootstrap 3 - DO NOT UPGRADE, the grid breaks *@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Global styles - copied from the old site.css that nobody could find */
+        body { padding-top: 50px; background-color: #f5f5f5; font-size: 13px; }
+        .navbar-custom {
+            background-color: #2c3e50;
+            border-color: #233140;
+            /* was #336699 but someone changed it and nobody remembers why */
+        }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .navbar-nav > li > a { color: #ecf0f1; }
+        .navbar-custom .navbar-nav > li > a:hover { color: #3498db; }
+        .navbar-custom .navbar-nav > .active > a,
+        .navbar-custom .navbar-nav > .active > a:hover {
+            background-color: #34495e;
+            color: white;
+        }
+        .panel-legacy {
+            border-color: #bdc3c7;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .panel-legacy > .panel-heading {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            font-weight: bold;
+            border-color: #bdc3c7;
+        }
+        .table-hover > tbody > tr:hover { background-color: #eaf2f8; }
+        .btn-acme { background-color: #2c3e50; color: white; border-color: #233140; }
+        .btn-acme:hover { background-color: #34495e; color: white; }
+        .status-active { color: #27ae60; font-weight: bold; }
+        .status-inactive { color: #e74c3c; font-weight: bold; }
+        .flash-ok { background-color: #d5f5e3; border: 1px solid #27ae60; padding: 10px; margin-bottom: 15px; border-radius: 3px; }
+        .flash-err { background-color: #fadbd8; border: 1px solid #e74c3c; padding: 10px; margin-bottom: 15px; border-radius: 3px; }
+        footer { margin-top: 30px; padding: 20px 0; background-color: #2c3e50; color: #95a5a6; font-size: 11px; }
+        /* Quick fix for modal z-index issue - ticket #4102 */
+        .modal-backdrop { z-index: 1040 !important; }
+        .modal { z-index: 1050 !important; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-custom navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">
+                    <i class="fa fa-industry"></i> ACME Industrial Supply
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li class="@(ViewBag.CurrentPage == "customers" ? "active" : "")">
+                        <a href="/"><i class="fa fa-users"></i> Customers</a>
+                    </li>
+                    <li class="@(ViewBag.CurrentPage == "reports" ? "active" : "")">
+                        <a href="/Home/Report"><i class="fa fa-bar-chart"></i> Reports</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" style="color: #95a5a6; cursor: default;">
+                        <i class="fa fa-user"></i> Admin
+                        @* Authentication was "coming in Phase 3" - there was no Phase 3 *@
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 20px;">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>ACME Industrial Supply Co. - Customer Management System v2.3.1</p>
+            <p>Originally Oracle Forms, migrated to ASP.NET 2017, migrated to ASP.NET Core 2022</p>
+            <p>&copy; 2017-2024 ACME Corp. &nbsp;|&nbsp; Internal Use Only &nbsp;|&nbsp; Contact: dave@@acmecorp.com (no longer valid)</p>
+        </div>
+    </footer>
+
+    @* jQuery 1.x because "3.x breaks something" - nobody knows what *@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

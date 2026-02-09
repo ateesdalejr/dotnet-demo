@@ -1,0 +1,10 @@
+# Worktrees
+work-1/
+work-2/
+work-3/
+work-4/
+
+# .NET build artifacts
+bin/
+obj/
+*.db
